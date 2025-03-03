@@ -6,10 +6,13 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/greeting")
 public class GreetingApp {
-    GreetingServices greetingServices;
-    public void GreetingController(GreetingServices greetingServices) {
+    private final GreetingServices greetingServices;
+
+    public GreetingApp(GreetingServices greetingServices) {
         this.greetingServices = greetingServices;
     }
+
+
     @GetMapping
     public Greeting greeting(@RequestParam(value = "name", defaultValue = "WEB") String name){
         return new Greeting("Hello" + " " + name + "!");
@@ -30,8 +33,12 @@ public class GreetingApp {
         return id + "Deleted";
     }
 
-    @GetMapping("/services")
-    public String greetingServices() {
-        return greetingServices.getGreeting();
+    @GetMapping("/service")
+    public String greeting(
+            @RequestParam(value = "firstName", required = false) String firstName,
+            @RequestParam(value = "lastName", required = false) String lastName
+    ) {
+        return greetingServices.getGreetingMessage(firstName, lastName);
     }
+
 }
