@@ -1,16 +1,21 @@
 package com.example.demo.Model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "greetings")
 public class Greeting {
-    private String message;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)  // Auto-generate ID
     private int id;
+
+    private String message;
+
+    public Greeting() {}
 
     public Greeting(String message) {
         this.message = message;
-
-    }
-
-    public String getMessage() {
-        return message;
     }
 
     public int getId() {
@@ -19,5 +24,13 @@ public class Greeting {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }
