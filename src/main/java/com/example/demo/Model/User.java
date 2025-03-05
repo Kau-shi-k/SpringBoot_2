@@ -1,5 +1,9 @@
 package com.example.demo.Model;
 
+
+import jakarta.persistence.Embeddable;
+
+@Embeddable
 public class User {
     private String firstName;
     private String lastName;

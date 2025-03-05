@@ -12,10 +12,14 @@ public class Greeting {
 
     private String message;
 
+    @Embedded
+    private User user;
+
     public Greeting() {}
 
-    public Greeting(String message) {
+    public Greeting(String message, User user) {
         this.message = message;
+        this.user = user;
     }
 
     public int getId() {
@@ -32,5 +36,13 @@ public class Greeting {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public User getUser(User user){
+        return user;
+    }
+
+    public void setUser(User user){
+        this.user = user;
     }
 }
