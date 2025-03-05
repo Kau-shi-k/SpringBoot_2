@@ -1,7 +1,9 @@
 package com.example.demo.Controller;
 
 import com.example.demo.Model.Greeting;
+import com.example.demo.Model.User;
 import com.example.demo.Service.GreetingServices;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,14 +27,16 @@ public class GreetingApp {
 
     // GET specific greeting by ID
     @GetMapping("/{id}")
-    public Optional<Greeting> getGreetingById(@PathVariable int id) {
-        return greetingServices.getGreetingById(id);
+    public ResponseEntity<Greeting> getGreetingById(@PathVariable int id) {
+        return greetingServices.getGreetingById(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
-
     // POST - Save new greeting
     @PostMapping
-    public Greeting saveGreeting(@RequestBody Greeting greeting) {
-        return greetingServices.saveGreeting(greeting);
+    public ResponseEntity<Greeting> saveGreeting(@RequestParam String message, @RequestBody User user) {
+        Greeting savedGreeting = greetingServices.saveGreeting(message, user);
+        return ResponseEntity.ok(savedGreeting);
     }
 
     // PUT - Update existing greeting

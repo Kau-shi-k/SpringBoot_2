@@ -1,6 +1,7 @@
 package com.example.demo.Service;
 
 import com.example.demo.Model.Greeting;
+import com.example.demo.Model.User;
 import com.example.demo.Repository.GreetingRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +17,10 @@ public class GreetingServices {
         this.greetingRepository = greetingRepository;
     }
 
-    public Greeting saveGreeting(Greeting greeting) {
+    public Greeting saveGreeting(String message, User user) {
+        Greeting greeting = new Greeting("Hello " + user.getFirstName() + " " + user.getLastName() + " " + message, user);
         return greetingRepository.save(greeting);
+
     }
 
     public List<Greeting> getAllGreetings() {
