@@ -13,13 +13,13 @@ public class Greeting {
     private String message;
 
     @Embedded // Used to store User object as part of the Greeting entity
-    private User user;
+    private AuthUser authUser;
 
     public Greeting() {}
 
-    public Greeting(String message, User user) {
+    public Greeting(String message, AuthUser authUser) {
         this.message = message;
-        this.user = user;
+        this.authUser = authUser;
     }
 
     public int getId() {
@@ -38,11 +38,11 @@ public class Greeting {
         this.message = message;
     }
 
-    public User getUser() {
-        return user;
+    public AuthUser getUser() {
+        return authUser;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(AuthUser authUser) {
+        this.authUser = authUser;
     }
 }

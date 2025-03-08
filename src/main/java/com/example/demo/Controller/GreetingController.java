@@ -1,13 +1,12 @@
 package com.example.demo.Controller;
 
-import com.example.demo.Model.Greeting;
-import com.example.demo.Model.User;
+import com.example.demo.Entity.Greeting;
+import com.example.demo.Entity.AuthUser;
 import com.example.demo.Service.GreetingServices;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/greeting")
@@ -34,8 +33,8 @@ public class GreetingApp {
     }
     // POST - Save new greeting
     @PostMapping
-    public ResponseEntity<Greeting> saveGreeting(@RequestParam String message, @RequestBody User user) {
-        Greeting savedGreeting = greetingServices.saveGreeting(message, user);
+    public ResponseEntity<Greeting> saveGreeting(@RequestParam String message, @RequestBody AuthUser authUser) {
+        Greeting savedGreeting = greetingServices.saveGreeting(message, authUser);
         return ResponseEntity.ok(savedGreeting);
     }
 
